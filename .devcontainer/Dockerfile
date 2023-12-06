@@ -13,7 +13,9 @@ FROM amazonlinux:${VARIANT}
 RUN    yum update \
     && yum install -y which sudo zsh glibc-all-langpacks \
     && yum groupinstall -y "Development Tools" \
-    && yum install -y java-21-amazon-corretto maven-amazon-corretto21 rust cargo golang clang nodejs \
+    && yum install -y java-21-amazon-corretto maven-amazon-corretto21 golang golang-docs golang-misc golang-shared golang-tests clang gdb lldb nodejs \
+    && yum install -y rust rust-analysis rust-analyzer rust-debugger-common rust-doc rust-gdb rust-lldb rust-std-static rust-std-static-wasm32-unknown-unknown rust-std-static-wasm32-wasi rust-toolset rustfmt cargo clippy \
+    && yum install -y libpq-devel \
     && rm -rf /var/cache/yum/* && yum clean all
 #    && amazon-linux-extras install -y python3.8 \
 #    && yum install -y python3 \

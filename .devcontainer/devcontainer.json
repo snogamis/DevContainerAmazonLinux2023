@@ -20,7 +20,54 @@
     "service": "devcontainer",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	
-	"remoteUser": "ec2-user"
+	"remoteUser": "ec2-user",
+	// Use 'mounts' to make the cargo cache persistent in a Docker Volume.
+	// "mounts": [
+	// 	{
+	// 		"source": "devcontainer-cargo-cache-${devcontainerId}",
+	// 		"target": "/usr/local/cargo",
+	// 		"type": "volume"
+	// 	}
+	// ]
+	"mounts": [
+	//	{
+	//		//"source": "devcontainer-vscode-extension-cache-${devcontainerId}",
+	//		"source": "devcontainer-vscode-extension-cache",
+	//		"target": "/home/ec2-user/.vscode-server",
+	//		"type": "volume"
+	//	},
+		{
+			//"source": "devcontainer-cargo-cache-${devcontainerId}",
+			"source": "devcontainer-cargo-cache",
+			//"target": "/usr/local/cargo",
+			"target": "/home/ec2-user/.cargo",
+			"type": "volume"
+		}
+	],
+	//"onCreateCommand": "sudo chown ec2-user:ec2-user /home/ec2-user/.vscode-server && /home/ec2-user/.cargo",
+	"onCreateCommand": "sudo chown ec2-user:ec2-user /home/ec2-user/.cargo && echo export PATH=\"$HOME/.cargo/bin:$PATH\" >> /home/ec2-user/.bash_profile",
+	
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"donjayamanne.git-extension-pack",
+				"shd101wyy.markdown-preview-enhanced",
+				"yzhang.markdown-all-in-one",
+				"esbenp.prettier-vscode",
+				"amazonwebservices.aws-toolkit-vscode",
+				"formulahendry.code-runner",
+				"Zerotaskx.rust-extension-pack",
+				"golang.go",
+				"ms-vscode.cpptools-extension-pack",
+				"donjayamanne.python-extension-pack",
+				"vscjava.vscode-java-pack",
+				"vmware.vscode-boot-dev-pack",
+				"loiane.ts-extension-pack",
+				"jawandarajbir.react-vscode-extension-pack",
+				"waderyan.nodejs-extension-pack"
+			]
+		}
+	}
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
 
